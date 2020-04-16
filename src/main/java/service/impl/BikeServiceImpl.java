@@ -8,11 +8,9 @@ import service.BikeService;
 public class BikeServiceImpl implements BikeService {
 
     @Override
-    public void getBikeCatalog(List<List<Bike>> bikes) {
-        for (List<Bike> bike: bikes) {
-            for (Bike b: bike) {
-                System.out.println(b.getInfo());
-            }
+    public void getBikeCatalog(List<Bike> bikes) {
+        for (Bike bike: bikes) {
+            System.out.println(bike.getInfo());
         }
     }
 }

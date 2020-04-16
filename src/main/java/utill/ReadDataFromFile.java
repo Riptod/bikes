@@ -29,11 +29,8 @@ public class ReadDataFromFile {
         return txtFile;
     }
 
-    public List<List<Bike>> getBikeModels(List<String> strings) {
-        List<List<Bike>> resultList = new ArrayList<>();
-        List<Bike> foldingBikeModels = new ArrayList<>();
-        List<Bike> eBikeModels = new ArrayList<>();
-        List<Bike> speedelecBikeModels = new ArrayList<>();
+    public List<Bike> getBikeModels(List<String> strings) {
+        List<Bike> resultList = new ArrayList<>();
         for (String s : strings) {
             String[] words = s.split("; ");
             if (words[0].contains("SPEEDELEC")) {
@@ -46,7 +43,7 @@ public class ReadDataFromFile {
                 speedElecBike.setBatteryCapacity(Integer.parseInt(words[4]));
                 speedElecBike.setColor(words[5]);
                 speedElecBike.setPrice(Integer.parseInt(words[6]));
-                speedelecBikeModels.add(speedElecBike);
+                resultList.add(speedElecBike);
             } else if (words[0].contains("E-BIKE")) {
                 Ebike ebike = new Ebike();
                 ebike.setType("E-BIKE");
@@ -57,7 +54,7 @@ public class ReadDataFromFile {
                 ebike.setBatteryCapacity(Integer.parseInt(words[4]));
                 ebike.setColor(words[5]);
                 ebike.setPrice(Integer.parseInt(words[6]));
-                eBikeModels.add(ebike);
+                resultList.add(ebike);
             } else if (words[0].contains("FOLDING")) {
                 FoldingBike foldingBike = new FoldingBike();
                 foldingBike.setType("FOLDING");
@@ -68,14 +65,11 @@ public class ReadDataFromFile {
                 foldingBike.setLights(Boolean.parseBoolean(words[4]));
                 foldingBike.setColor(words[5]);
                 foldingBike.setPrice(Integer.parseInt(words[6]));
-                foldingBikeModels.add(foldingBike);
+                resultList.add(foldingBike);
             } else {
                 System.out.println("ERROR");
             }
         }
-        resultList.add(foldingBikeModels);
-        resultList.add(eBikeModels);
-        resultList.add(speedelecBikeModels);
         return resultList;
     }
 }
