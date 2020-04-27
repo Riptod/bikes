@@ -1,6 +1,7 @@
 package model;
 
 public class FoldingBike extends Bike{
+
     private int sizeOfWheels;
     private int gears;
 
@@ -21,18 +22,9 @@ public class FoldingBike extends Bike{
     }
 
     @Override
-    public String toString() {
-        return "FoldingBike{" +
-                super.toString() +
-                "sizeOfWheels=" + sizeOfWheels +
-                ", gears=" + gears +
-                '}';
-    }
-
-    @Override
     public String getInfo() {
-        return super.getType() + " " + super.getBrand() + " with " + getGears()
-                + " gear(s) and" + super.isLights() + "head/tail light."
-                + "\n Price: " + super.getPrice();
+        return getType() + " " + getBrand() + " with " + getGears()
+                + " gear(s) and" + isLights() + "head/tail light."
+                + "\n Price: " + getPrice();
     }
 }
