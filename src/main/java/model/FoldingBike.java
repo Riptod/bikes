@@ -27,4 +27,15 @@ public class FoldingBike extends Bike{
                 + " gear(s) and" + isLights() + "head/tail light."
                 + "\n Price: " + getPrice();
     }
+
+    @Override
+    public String toString() {
+        return "FoldingBike{Brand= " + super.getBrand()
+                + ", sizeOfWheels= " + sizeOfWheels
+                + ", gears= " + gears
+                + ", weight= " + super.getWeight()
+                + ", availability of lights at front and bac:" + super.isLights()
+                + ", color= " + super.getColor()
+                + ", price= " + super.getPrice() + '}';
+    }
 }

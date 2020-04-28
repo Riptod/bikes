@@ -12,4 +12,6 @@ public interface BikeService {
     void addSpeedelecOrEBike();
 
     void writeToFile(String path);
+
+    void searchBike(List<Bike> bikes);
 }

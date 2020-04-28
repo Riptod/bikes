@@ -59,8 +59,8 @@ public class ReadDataFromFile {
                 resultList.add(ebike);
             } else if (type[0].equals("FOLDING")) {
                 FoldingBike foldingBike = new FoldingBike();
-                foldingBike.setType(type[0]);
-                foldingBike.setBrand(words[0].substring(8));
+                foldingBike.setType(type[0] + type[1]);
+                foldingBike.setBrand(words[0].substring(13));
                 foldingBike.setSizeOfWheels(Integer.parseInt(words[1]));
                 foldingBike.setGears(Integer.parseInt(words[2]));
                 foldingBike.setWeight(Integer.parseInt(words[3]));

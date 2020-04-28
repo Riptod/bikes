@@ -60,4 +60,16 @@ public abstract class Bike {
     public void setPrice(int price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "Bike{" +
+                "type='" + type + '\'' +
+                ", brand='" + brand + '\'' +
+                ", weight=" + weight +
+                ", lights=" + lights +
+                ", color='" + color + '\'' +
+                ", price=" + price +
+                '}';
+    }
 }

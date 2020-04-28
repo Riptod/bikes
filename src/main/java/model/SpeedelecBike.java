@@ -27,4 +27,15 @@ public class SpeedelecBike extends Bike {
                 + " mAh battery and" + isLights() + "head/tail light."
                 + "\n Price: " + getPrice();
     }
+
+    @Override
+    public String toString() {
+        return "Speedelec{Brand= " + super.getBrand()
+                + ", maxSpeed= " + maxSpeed
+                + ", weight= " + super.getWeight()
+                + ", availability of lights at front and bac:" + super.isLights()
+                + ", battery capacity = " + batteryCapacity
+                + ", color= " + super.getColor()
+                + ", price= " + super.getPrice() + '}';
+    }
 }
