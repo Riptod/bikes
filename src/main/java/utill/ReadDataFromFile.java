@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import exception.FailReadWriteFileException;
 import model.Bike;
 import model.Ebike;
 import model.FoldingBike;
@@ -13,7 +14,7 @@ import model.SpeedelecBike;
 
 public class ReadDataFromFile {
 
-    public List<String> parseTxtToList(String path) throws IOException {
+    public List<String> parseTxtToList(String path) {
         List<String> txtFile = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader
                 (path))) {
@@ -23,7 +24,7 @@ public class ReadDataFromFile {
                 txtFile.add(line);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new FailReadWriteFileException("Can`t read file", e);
         }
         txtFile.remove(txtFile.size() - 1);
         return txtFile;
@@ -33,31 +34,32 @@ public class ReadDataFromFile {
         List<Bike> resultList = new ArrayList<>();
         for (String s : strings) {
             String[] words = s.split("; ");
-            if (words[0].contains("SPEEDELEC")) {
-                SpeedelecBike speedElecBike = new SpeedelecBike();
-                speedElecBike.setType("SPEEDELEC");
-                speedElecBike.setBrand(words[0].substring(10));
-                speedElecBike.setMaxSpeed(Integer.parseInt(words[1]));
-                speedElecBike.setWeight(Integer.parseInt(words[2]));
-                speedElecBike.setLights(Boolean.parseBoolean(words[3]));
-                speedElecBike.setBatteryCapacity(Integer.parseInt(words[4]));
-                speedElecBike.setColor(words[5]);
-                speedElecBike.setPrice(Integer.parseInt(words[6]));
-                resultList.add(speedElecBike);
-            } else if (words[0].contains("E-BIKE")) {
+            String[] type = words[0].split(" ");
+            if (type[0].equals("SPEEDELEC")) {
+                SpeedelecBike speedelecBike = new SpeedelecBike();
+                speedelecBike.setType(type[0]);
+                speedelecBike.setBrand(words[0].substring(type[0].length() + 1));
+                speedelecBike.setMaxSpeed(Integer.parseInt(words[1]));
+                speedelecBike.setLights(Boolean.parseBoolean(words[3]));
+                speedelecBike.setBatteryCapacity(Integer.parseInt(words[4]));
+                speedelecBike.setWeight(Integer.parseInt(words[2]));
+                speedelecBike.setColor(words[5]);
+                speedelecBike.setPrice(Integer.parseInt(words[6]));
+                resultList.add(speedelecBike);
+            } else if (type[0].equals("E-BIKE")) {
                 Ebike ebike = new Ebike();
-                ebike.setType("E-BIKE");
-                ebike.setBrand(words[0].substring(7));
+                ebike.setType(type[0]);
+                ebike.setBrand(words[0].substring(type[0].length() + 1));
                 ebike.setMaxSpeed(Integer.parseInt(words[1]));
-                ebike.setWeight(Integer.parseInt(words[2]));
                 ebike.setLights(Boolean.parseBoolean(words[3]));
                 ebike.setBatteryCapacity(Integer.parseInt(words[4]));
+                ebike.setWeight(Integer.parseInt(words[2]));
                 ebike.setColor(words[5]);
                 ebike.setPrice(Integer.parseInt(words[6]));
                 resultList.add(ebike);
-            } else if (words[0].contains("FOLDING")) {
+            } else if (type[0].equals("FOLDING")) {
                 FoldingBike foldingBike = new FoldingBike();
-                foldingBike.setType("FOLDING");
+                foldingBike.setType(type[0]);
                 foldingBike.setBrand(words[0].substring(8));
                 foldingBike.setSizeOfWheels(Integer.parseInt(words[1]));
                 foldingBike.setGears(Integer.parseInt(words[2]));
@@ -67,9 +69,9 @@ public class ReadDataFromFile {
                 foldingBike.setPrice(Integer.parseInt(words[6]));
                 resultList.add(foldingBike);
             } else {
-                System.out.println("ERROR");
-            }
+            throw new IllegalArgumentException("Cant find available bike model");
         }
-        return resultList;
     }
+        return resultList;
+}
 }

@@ -1,6 +1,7 @@
 package model;
 
 public class SpeedelecBike extends Bike {
+
     private int maxSpeed;
     private int batteryCapacity;
 
@@ -21,18 +22,9 @@ public class SpeedelecBike extends Bike {
     }
 
     @Override
-    public String toString() {
-        return "SpeedelecBike{" +
-                super.toString() +
-                "maxSpeed=" + maxSpeed +
-                ", batteryCapacity=" + batteryCapacity +
-                '}';
-    }
-
-    @Override
     public String getInfo() {
-        return super.getType() + " " + super.getBrand() + " with " + getBatteryCapacity()
-                + " mAh battery and" + super.isLights() + "head/tail light."
-                + "\n Price: " + super.getPrice();
+        return getType() + " " + getBrand() + " with " + getBatteryCapacity()
+                + " mAh battery and" + isLights() + "head/tail light."
+                + "\n Price: " + getPrice();
     }
 }
